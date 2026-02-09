@@ -5,11 +5,11 @@ on:
     branches:
       - main
 
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment : prod
+    environment: prod
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
 
     - name: Build Frontend
       run: |
-        cd frontend
+        cd frontends
         npm install
         npm run build
 
@@ -31,7 +31,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
-        source: "frontend/dist/*"
+        source: "frontends/dist/*"
         target: "/usr/share/nginx/html"
 
     - name: Restart Nginx
